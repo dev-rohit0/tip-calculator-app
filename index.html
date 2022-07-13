@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Tip calculator app</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <!-- Alpine Plugins -->
+  <script defer src="https://unpkg.com/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
+  <script src="//unpkg.com/alpinejs" defer></script>
+  <!-- Alpine Core -->
+  <!-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> -->
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+</head>
+<!-- Bill
+
+Select Tip %
+5%
+10%
+15%
+25%
+50%
+Custom
+
+Number of People
+
+Tip Amount
+/ person
+
+Total
+/ person
+
+Reset -->
+
+<body class="bg-lightgrayishcyan">
+  <main class=" desktop:flex desktop:flex-col desktop:justify-center desktop:items-center ">
+    <div class="header flex justify-center items-center">
+      <img src="./images/logo.svg" class="my-8 w-20 desktop:my-16" alt="logo">
+    </div>
+
+
+    <div
+      class="sm:flex sm:flex-row sm:bg-white sm:justify-center sm:items-center sm:rounded-lg desktop:w-[932px] desktop:rounded-xl desktop:h-[393px]">
+
+      <div class="main flex flex-col sm:flex-row bg-white w-screen max-h-screen rounded-t-2xl">
+        <div>
+
+          <div class="flex flex-col justify-start items-start space-y-2 mx-6 my-4  " id="bill">
+            <h2 class="text-darkgrayishcyan font-spaceMono desktop:w-[466px] text-md">Bill</h2>
+            <div x-data="" class="w-[292px]">
+              <input x-mask:dynamic="$money($input)"
+                class="bg-verylightgrayishcyan focus:outline-none focus:ring-1 focus:ring-strongcyan rounded text-right text-[24px] font-spaceMono px-2 py-1 absolute text-darkgrayishcyan w-[calc(100%_-_3rem)] desktop:w-[556px] sm:w-[292px] lg:w-[420px] placeholder:text-left placeholder:px-2 placeholder:font-spaceMono placeholder:text-darkgrayishcyan"
+                type="text" name="bill" id="billAmount">
+              <img src="./images/icon-dollar.svg" alt="icon-dollar" class="relative py-3 px-4">
+            </div>
+          </div>
+
+          <div class="mx-6 mt-3">
+            <h2 class="text-darkgrayishcyan font-spaceMono text-md text-left">Select Tip %</h2>
+          </div>
+          <div class="tip flex flex-col justify-center items-center mx-6 space-y-2 mt-2">
+            <div id="tip-percentage" class="flex flex-row justify-center space-x-12 items-center">
+              <div class="flex flex-wrap items-center gap-4 tipPercentage">
+                <button id="five-percent" tip="5" clicked="true"
+                  class="bg-verydarkcyan text-center px-12 rounded py-1 cursor-pointer text-lightgrayishcyan font-spaceMono w-[129.06px] text-lg hover:bg-strongcyan">5%</button>
+                <button id="fifteen-percent" tip="15" clicked="true"
+                  class="bg-verydarkcyan text-center px-12 rounded py-1 cursor-pointer text-lightgrayishcyan font-spaceMono text-lg hover:bg-strongcyan">15%</button>
+                <button id="fifty-percent" tip="50" clicked="true"
+                  class="bg-verydarkcyan text-center px-12 rounded py-1 cursor-pointer text-lightgrayishcyan font-spaceMono text-lg hover:bg-strongcyan">50%</button>
+                <!-- </div>
+                  <div class="flex flex-col space-y-2"> -->
+                <button id="ten-percent" tip="10" clicked="true"
+                  class="bg-verydarkcyan text-center px-12 rounded py-1 cursor-pointer text-lightgrayishcyan font-spaceMono text-lg hover:bg-strongcyan">10%</button>
+                <button id="twentyFive-percent" tip="25" clicked="true"
+                  class="bg-verydarkcyan text-center px-12 rounded py-1 cursor-pointer text-lightgrayishcyan font-spaceMono text-lg hover:bg-strongcyan">25%</button>
+                <div x-data="">
+                  <input x-mask="99"
+                    class="bg-verylightgrayishcyan rounded text-[24px] focus:outline-none focus:ring-1 focus:ring-strongcyan placeholder:font-spaceMono placeholder:text-right w-32 h-9 px-2 text-lg text-right font-spaceMono text-darkgrayishcyan"
+                    type="text" name="tip" id="tipPercentageCustom" placeholder="Custom">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col justify-start items-start space-y-2 mx-6 my-4 " id="bill">
+            <div class="flex flex-row justify-between items-center space-x-12 ">
+              <h2 class="text-darkgrayishcyan font-spaceMono text-md">Number of People</h2>
+              <h2 class="text-red-700 font-spaceMono text-xs hidden" id="spclElement">Can't be Zero</h2>
+            </div>
+            <div x-data="" class="w-[292px]">
+
+              <input x-mask="9999"
+                class="bg-verylightgrayishcyan focus:outline-none focus:ring-1 focus:ring-strongcyan rounded text-[24px] text-right font-spaceMono px-2 py-1 text-darkgrayishcyan absolute w-[calc(100%_-_3rem)] sm:w-[274.8px] desktop:w-[292px] lg:w-[420px] placeholder:text-left placeholder:px-2 placeholder:font-spaceMono placeholder:text-darkgrayishcyan"
+                type="text" value="1" name="number" id="totalPeople">
+              <img src="./images/icon-person.svg" alt="icon-person" class="relative py-3 px-4">
+            </div>
+          </div>
+        </div>
+        <div >
+
+          <div
+            class=" tipCal bg-verydarkcyan font-spaceMono flex flex-col justify-center items-center mt-3 mb-4 rounded-lg mx-6 sm:w-80  ">
+            <div class="tipAmount flex flex-row justify-between items-center space-x-28 mx-3">
+              <h3 class="text-verylightgrayishcyan text-sm mt-6 mb-4">Tip Amount <br> <span
+                  class="text-xs text-darkgrayishcyan pt-0">/person</span></h3>
+              <p class="text-3xl text-strongcyan" id="billTotalPerPerson">$0.00</p>
+            </div>
+            <div class="totalAmount flex flex-row justify-between items-center space-x-28 mx-3  ">
+              <h3 class="text-verylightgrayishcyan text-left text-sm w-[85.69px]">Total <br> <span
+                  class="text-xs text-darkgrayishcyan pt-0">/person</span></h3>
+              <p class="text-3xl break-all text-right text-strongcyan" id="billTipAmount">$0.00</p>
+            </div>
+
+            <button
+              class="bg-strongcyan text-verydarkcyan text-center w-[calc(100%_-_3rem)] rounded-md mx-6 py-2 uppercase my-4 hover:bg-grayishcyan sm:mt-40 "
+              id="resetButton">Reset</button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- <div class="totalCal bg-verydarkcyan font-spaceMono flex flex-col justify-center items-center mt-3 mb-4 rounded-lg">
+
+      </div> -->
+
+    </div>
+  </main>
+
+  <!-- <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div> -->
+  <script type="module" src="./main.js"></script>
+</body>
+
+</html>
